@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Личный кабинет</title>
+  <link rel="stylesheet" href="profiles.css">
+</head>
+<body>
+<div class="container">
+  <h2>Личный кабинет</h2>
+
+  <div class="user-info">
+    <h3>Информация о пользователе</h3>
+    <p><strong>Электронная почта:</strong> <%= current_user.email %></p>
+    <p><strong>Имя:</strong> <%= current_user.name %></p>
+    <p><strong>Фамилия:</strong> <%= current_user.surname %></p>
+    <p><strong>Телефон:</strong> <%= current_user.phone %></p>
+    <p><strong>Сумма выкупа:</strong> $<%= current_user.orders.sum(:amount) %></p>
+  </div>
+
+  <div class="orders">
+    <h3>Список заказов</h3>
+    <% if @orders.any? %>
+      <ul>
+
+        <tr>
+          <% @orders.each do |order| %>
+            <td>
+              <div class="category">
+                <%= image_tag order.product.image_url, :size => "200x200" %>
+                <h3><%= "$#{order.product.amount}" %></h3>
+                <h3><%= "#{order.product.name}" %></h3>
+                <h4><%= "Quantity: #{@orders.count[order.product_id]}" %></h4>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+      </ul>
+    <% else %>
+      <p>Нет доступных заказов.</p>
+    <% end %>
+  </div>
+  <h4><%= link_to('Каталог', "http://localhost:3000/catalogs") %></h4>
+  <h5><%= button_to('Log out', destroy_user_session_path, method: :delete) %></h5>
+</div>
+</body>
+</html>

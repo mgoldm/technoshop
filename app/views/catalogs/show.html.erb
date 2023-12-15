@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <%= render "shared/base", resource: current_user %>
+  <link rel="stylesheet" href="categories.css">
+</head>
+<body>
+<div class="container">
+  <h2><%= @category.name %></h2>
+
+  <table class="categories-table">
+    <tr>
+      <% @products.each_slice(3) do |products_row| %>
+      <tr>
+        <% products_row.each do |product| %>
+          <td>
+            <div class="category">
+              <%= image_tag product.image_url, :size => "200x200" %>
+              <h3><%= "$#{product.amount}" %></h3>
+              <h3><%= link_to(product.name, "http://localhost:3000/cart/purchase?purchase_id=#{product.id}") %></h3>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

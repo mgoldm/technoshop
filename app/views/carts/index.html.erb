@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <%= render "shared/base", resource: current_user %>
+  <link rel="stylesheet" href="categories.css">
+  <style>
+      /* CSS стили */
+      .product {
+          border: 1px solid #ccc;
+          padding: 20px;
+          margin-bottom: 20px;
+          border-radius: 8px;
+          background-color: #f9f9f9;
+      }
+
+      .product-image {
+          width: 200px;
+          height: auto;
+          display: block;
+          margin-bottom: 10px;
+      }
+
+      .product h3 {
+          margin-top: 0;
+          font-size: 18px;
+      }
+
+      .product p {
+          margin-bottom: 8px;
+      }
+
+      .product a {
+          display: inline-block;
+          padding: 8px 12px;
+          background-color: #007bff;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 4px;
+      }
+
+      .product a:hover {
+          background-color: #0056b3;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Корзина</h2>
+
+  <div class="products">
+    <% @cart_elements.uniq.each do |product| %>
+      <div class="product">
+        <%= image_tag product["image_url"], class: 'product-image' %>
+        <%= "#{product["name"] } " %>
+        <p><%= "Quantity: #{@cart[product]}" %></p>
+        <p><%= "Amount: $#{product["amount"] } " %></p>
+        <p><%= "Final amount: $#{product["amount"] * @cart[product] }" %></p>
+        <p> <%= link_to 'Remove all', controller: 'carts', action: 'remove', count:  @cart[product], product: product.to_json%></p>
+        <p> <%= link_to 'Remove one', controller: 'carts', action: 'remove', count:  1, product: product.to_json%></p>
+
+      </div>
+    <% end %>
+  </div>
+  <h4>  <%= "Итого: $#{@amount}" if @amount != 0 %></h4>
+
+  <% unless @cart_elements.empty? %>
+  <h5> <%=button_to('Checkout', 'http://localhost:3000/cart/checkout', method: :get)%></h5>
+    <%else %>
+  <h5>Your cart is empty</h5>
+    <% end %>
+</div>
+</body>
+</html>

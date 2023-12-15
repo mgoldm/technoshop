@@ -1,0 +1,16 @@
+<% if !current_user.nil? %>
+  <div class="header">
+    <h1>Technoshop</h1> <!-- Название "technoport" слева от корзины -->
+    <h2> <%= link_to('Каталог', "http://localhost:3000/catalogs") %> </h2>
+    <h2> <%= link_to('Profile', "http://localhost:3000/") %> </h2>
+    <div class="cart">
+      <% cart_count = Red.llen("user-purchase-#{current_user.id}") %>
+      <% if cart_count > 0 %>
+        <a href="<%= url_for(controller: 'carts', action: 'index') %>">
+          <%= image_tag 'cart.png', class: 'cart-image', alt: 'Cart' %>
+          <span class="cart-count"><%= cart_count %></span> <!-- Количество товаров в корзине -->
+        </a>
+      <% end %>
+    </div>
+  </div>
+<% end %>

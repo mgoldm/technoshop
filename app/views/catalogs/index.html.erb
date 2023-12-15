@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= render "shared/base", resource: current_user %>
+  <link rel="stylesheet" href="categories.css">
+</head>
+<body>
+<div class="container">
+  <h2>Категории</h2>
+
+  <table class="categories-table">
+    <tr>
+      <% @categories.each_slice(3) do |category_row| %>
+      <tr>
+        <% category_row.each do |category| %>
+          <td>
+            <div class="category">
+              <%= image_tag category.image_url, :size => "200x200" %>
+              <h3><%= link_to(category.name, "http://localhost:3000/catalogs/#{category.id}") %></h3>
+              <% if current_user.is_admin %>
+              <%= link_to 'Delete', "http://localhost:3000/catalogs/#{category.id}", method: :delete %>
+              <%end %>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tr>
+  </table>
+  <h3> <%= link_to( 'Create New', "http://localhost:3000/catalog/new", method: :get) if current_user.is_admin %></h3>
+</div>
+</body>
+</html>

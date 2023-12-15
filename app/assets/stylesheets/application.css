@@ -1,0 +1,67 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+/* Стили для шапки сайта */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cart-icon img {
+    width: 30px; /* Размер иконки корзины */
+    height: auto;
+    vertical-align: middle;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 12px;
+}
+.cart-text {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    /* Другие желаемые стили */
+}
+
+.cart-image {
+    width: 40px; /* Задаем желаемую ширину */
+    height: auto; /* Устанавливаем автоматическую высоту, чтобы сохранить пропорции */
+}
